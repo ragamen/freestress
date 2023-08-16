@@ -802,3 +802,36 @@ RutaEsperanza
 CaminosSoñados
 
 */
+
+
+
+/*
+
+//    var voice = {"name": "es-us-x-esc-network", "locale": "es-US"};
+//    var voice = {"name": "es-es-x-eec-local", "locale": "es-ES"};
+    //   var voice = {"name": "es-us-x-sfb-local", "locale": "es-US}"};
+//    var voice = {"name": "es-es-x-eea-network", "locale": "es-ES"};
+//    var voice = {"name": "es-es-x-eec-network", "locale": "es-ES"};
+//    var voice = {"name": "es-es-x-eed-network", "locale": "es-ES"};
+// Hombre
+//    var voice = {"name": "es-us-x-esd-network", "locale": "es-US"};
+// Mujer   var voice = {"name": "es-US-language", "locale": "es-US"};
+// var voice = {"name": "es-es-x-eec-local", "locale": "es-ES"};
+// Hombre    var voice = {"name": "es-us-x-esd-local", "locale": "es-US"};
+//Mujer var voice = {"name": "es-es-x-eef-local", "locale": "es-ES"};
+//mujer    var voice = {"name": "es-US-language", "locale": "es-US"};
+//mujer var voice ={"name": "es-us-x-esc-network", "locale" : "es-US"};
+
+    // var voice = {"name": "es-us-x-sfb-local", "locale": " es-US}"};
+    //var voice = {"name": "es-es-x-eea-network", "locale": " es-ES"};
+    //  var voice = {"name": "es-es-x-eec-network", "locale": " es-ES"};
+    //   }
+    //String voiceId = isMaleVoice ? 'es-MX-x-xxx-x-xx' : 'es-MX-x-xxx-x-yy';
+    // voice = await flutterTts.getVoices;
+
+//    var selectedVoice = voice.firstWhere((v) => v.locale == voiceId);
+    //  var selectedVoice =
+    //      voice.firstWhere((v) => v['locale'] == voiceId, orElse: () => null);
+    //var languages = await flutterTts.getLanguages;
+    //print(languages);
+*/
