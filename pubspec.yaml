@@ -39,7 +39,7 @@ dependencies:
   flutter_tts: ^3.7.0
   wakelock: ^0.6.2
   google_mobile_ads: ^3.0.0
-  
+ 
   
 dev_dependencies:
   flutter_test:

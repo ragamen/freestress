@@ -1,4 +1,4 @@
-package com.example.freestress
+package com.mentorvital.freestress
 
 import io.flutter.embedding.android.FlutterActivity
 

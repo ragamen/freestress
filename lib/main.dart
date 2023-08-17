@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -65,30 +64,31 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isMaleVoice = true;
   final List<String> categories = [
     'Amor',
+    'AutoAyuda',
     'Motivación',
-    'Aliento',
+    'Salmos',
     'Autoestima',
     'Autoestima para una amiga',
     'Autoestima para un niño',
     'Buenos Dias'
   ];
+  //'https://qpewttmefqniyqflyjmu.supabase.co/storage/v1/object/public/media/freestress/musica-Wolfgang-Amadeus-Mozart-Concierto-para-piano-n21.mp3',
+  //'https://qpewttmefqniyqflyjmu.supabase.co/storage/v1/object/public/media/freestress/musica-zero_project_Ilotana.mp3',
+  //'https://qpewttmefqniyqflyjmu.supabase.co/storage/v1/object/public/media/freestress/musica-zero_project_Ilotana.mp3',
   final List<String> songs = [
-    //'https://qpewttmefqniyqflyjmu.supabase.co/storage/v1/object/public/media/freestress/musica-Wolfgang-Amadeus-Mozart-Concierto-para-piano-n21.mp3',
-    //'https://qpewttmefqniyqflyjmu.supabase.co/storage/v1/object/public/media/freestress/musica-zero_project_Ilotana.mp3',
-    //'https://qpewttmefqniyqflyjmu.supabase.co/storage/v1/object/public/media/freestress/musica-zero_project_Ilotana.mp3',
-    'assets/song3.mp3',
-    'assets/song4.mp3',
-    'assets/song5.mp3',
-    'assets/song6.mp3',
-    'assets/song7.mp3',
-    'assets/song8.mp3',
-    'assets/song9.mp3',
-    'assets/song10.mp3',
-    'assets/song11.mp3',
-    'assets/song12.mp3',
-    'assets/song13.mp3',
-    'assets/song14.mp3',
-    'assets/song15.mp3',
+    '../assets/song3.mp3',
+    '../assets/song4.mp3',
+    '../assets/song5.mp3',
+    '../assets/song6.mp3',
+    '../assets/song7.mp3',
+    '../assets/song8.mp3',
+    '../assets/song9.mp3',
+    '../assets/song10.mp3',
+    '../assets/song11.mp3',
+    '../assets/song12.mp3',
+    '../assets/song13.mp3',
+    '../assets/song14.mp3',
+    '../assets/song15.mp3',
 
     // ...
   ];
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String selectedCategory = 'Amor';
   List<Phrase> currentPhrases = [];
   int currentPhraseIndex = 0;
-  String currentSong = 'assets/song4.mp3';
+  String curSongs = 'assets/song4.mp3';
 //      'https://qpewttmefqniyqflyjmu.supabase.co/storage/v1/object/public/media/freestress/musica-Wolfgang-Amadeus-Mozart-Concierto-para-piano-n21.mp3';
   void playPause() async {
     if (isPlaying) {
@@ -122,8 +122,9 @@ class _HomeScreenState extends State<HomeScreen> {
       selectedCategory = newCategory;
       currentPhrases = []; // Clear current phrases
       currentPhraseIndex = 0;
-      //    currentSong = songs[3]; // Change logic for random song
+      //    curSongs = songs[3]; // Change logic for random song
     });
+
     _loadAudio();
     _loadRandomPhrases();
     _startCarousel();
@@ -155,14 +156,14 @@ class _HomeScreenState extends State<HomeScreen> {
   void _loadAudio() async {
     // String selectedVoice = getSelectedVoice();
     await audioPlayer.stop();
-    await audioPlayer.setSourceUrl(currentSong); // Change to setSourceUrl
+    await audioPlayer.setSourceUrl(curSongs); // Change to setSourceUrl
     await audioPlayer.setVolume(volume);
     if (isPlaying) {
       await audioPlayer.resume();
     } else {
       try {
         await audioPlayer.play(
-          UrlSource(currentSong), // Use UrlSource
+          UrlSource(curSongs), // Use UrlSource
         );
       } catch (e) {
         if (kDebugMode) {
@@ -193,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final randomSong = availableSongs[Random().nextInt(availableSongs.length)];
     setState(() {
-      currentSong = randomSong;
+      curSongs = randomSong;
       previousSong = randomSong;
     });
     _loadAudio();
@@ -216,8 +217,10 @@ class _HomeScreenState extends State<HomeScreen> {
       _createBannerAd();
       _createInterstitialAd();
     }
+
     // Activa el bloqueo de la pantalla
     Wakelock.enable();
+    _playRandomSong();
     _loadAudio();
     _loadRandomPhrases();
     _startCarousel();
@@ -303,13 +306,31 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Center(
-                  child: Text(
+                  child: RichText(
+                    text: TextSpan(
+                      children: currentPhrases.isNotEmpty
+                          ? [
+                              TextSpan(
+                                text: limitCharactersPerLine(
+                                  currentPhrases[currentPhraseIndex].text,
+                                  40, // Cambia este valor al número de caracteres deseado por línea
+                                ),
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              ),
+                            ]
+                          : [],
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+
+                  /* Text(
                     currentPhrases.isNotEmpty
                         ? currentPhrases[currentPhraseIndex].text
                         : '',
                     style: const TextStyle(fontSize: 20, color: Colors.white),
                     textAlign: TextAlign.center,
-                  ),
+                  ),*/
                 ),
               ],
             ),
@@ -367,6 +388,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: Text(categories[index]),
               onTap: () {
                 if (kIsWeb) {
+                  parartodo();
                   changeCategory(categories[index]);
                   Navigator.pop(context);
                 } else {
@@ -380,5 +402,31 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  String limitCharactersPerLine(String text, int charactersPerLine) {
+    final words = text.split(' ');
+    final List<String> lines = [];
+    String currentLine = '';
+
+    for (final word in words) {
+      if ((currentLine + word).length <= charactersPerLine) {
+        currentLine += (currentLine.isNotEmpty ? ' ' : '') + word;
+      } else {
+        lines.add(currentLine);
+        currentLine = word;
+      }
+    }
+
+    if (currentLine.isNotEmpty) {
+      lines.add(currentLine);
+    }
+
+    return lines.join('\n');
+  }
+
+  parartodo() async {
+    await flutterTts.speak(' ');
+    await audioPlayer.stop();
   }
 }
